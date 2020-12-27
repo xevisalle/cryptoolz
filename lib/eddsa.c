@@ -143,16 +143,16 @@ void generate_keypair(publicKey *pk, secretKey *sk)
 {
 	unsigned char hash[SHA512_DIGEST_LENGTH];
 
-    SHA512_CTX sha512;
-    SHA512_Init(&sha512);
-    SHA512_Update(&sha512, sk->sk, strlen(sk->sk));
-    SHA512_Final(hash, &sha512);
+	SHA512_CTX sha512;
+	SHA512_Init(&sha512);
+	SHA512_Update(&sha512, sk->sk, strlen(sk->sk));
+	SHA512_Final(hash, &sha512);
 
 	char hashString[SHA512_DIGEST_LENGTH/2];
 	for(int i = 0; i < SHA512_DIGEST_LENGTH/2; i++)
 	{
 		sprintf(&sk->hsk[i*2], "%02x", (unsigned int)hash[i]);
-    	sprintf(&hashString[i*2], "%02x", (unsigned int)hash[i+32]);
+		sprintf(&hashString[i*2], "%02x", (unsigned int)hash[i+32]);
 	}
 
 	mpz_init_set_str(sk->s, hashString, 16);
@@ -170,16 +170,16 @@ void sign_message(signature *sig, char *message, secretKey *sk, publicKey *pk)
 {
 	unsigned char hash[SHA512_DIGEST_LENGTH];
 
-    SHA512_CTX sha512;
+	SHA512_CTX sha512;
 	SHA512_Init(&sha512);
-    SHA512_Update(&sha512, sk->hsk, 32);
-    SHA512_Update(&sha512, message, strlen(message));
-    SHA512_Final(hash, &sha512);
+	SHA512_Update(&sha512, sk->hsk, 32);
+	SHA512_Update(&sha512, message, strlen(message));
+	SHA512_Final(hash, &sha512);
 
-    char hashString[SHA512_DIGEST_LENGTH];
+	char hashString[SHA512_DIGEST_LENGTH];
 	for(int i = 0; i < SHA512_DIGEST_LENGTH; i++)
 	{
-    	sprintf(&hashString[i*2], "%02x", (unsigned int)hash[i]);
+		sprintf(&hashString[i*2], "%02x", (unsigned int)hash[i]);
 	}
 
 	mpz_t r;

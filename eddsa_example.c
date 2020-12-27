@@ -28,7 +28,7 @@ int main()
 	gmp_printf("S: %Zd \n", sig.S);
 
 	// verify signature
-    printf("\nVERIFY SIGNATURE\n");
+	printf("\nVERIFY SIGNATURE\n");
 	int isVerified = verify_signature(&sig, message, &pk);
 	printf("Is verified: %d\n", isVerified);
 

@@ -131,5 +131,8 @@ int main()
 	if (test6) printf(GREEN "PASSED\n" RESET);
 	else printf(RED "NOT PASSED\n" RESET);
 
+	// we clear the public parameters to avoid memory leaks
+	clear_public_parameters();
+
 	return 0;
 }

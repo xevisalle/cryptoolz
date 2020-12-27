@@ -2,8 +2,8 @@
 void mimc7(mpz_t *hashOut, mpz_t *x_in, mpz_t *k)
 {
 	char buff[2048];
-    FILE *cnst;
-    cnst = fopen("lib/constants.txt", "r");
+	FILE *cnst;
+	cnst = fopen("lib/constants.txt", "r");
 
 	mpz_t c[NROUNDS];
 	for (int i = 0; i < NROUNDS; i++)
