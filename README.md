@@ -10,7 +10,7 @@ This repository contains a bunch of cryptographic primitives coded in C, intende
 ## Preliminaries
 To use the library, we need [GMP](https://gmplib.org/) and [OpenSSL](https://www.openssl.org/). To install them, simply run:
 
-``sudo apt-get install ligmp-dev openssl``
+``sudo apt-get install libgmp-dev openssl libssl-dev``
 
 ## Usage
 ### Compile and test

@@ -17,7 +17,8 @@ int test1()
 	signature sig;
 	sign_message(&sig, message, &sk, &pk);
 
-	return verify_signature(&sig, message, &pk);
+	int verified = verify_signature(&sig, message, &pk);
+	return verified;
 }
 
 int test2()
@@ -33,9 +34,10 @@ int test2()
 	signature sig;
 	sign_message(&sig, message, &sk, &pk);
 
-	char *fakeMessage = "1234";
+	char *fakeMessage = "5678";
 
-	return !verify_signature(&sig, fakeMessage, &pk);
+	int verified = !verify_signature(&sig, fakeMessage, &pk);
+	return verified;
 }
 
 int test3()
@@ -53,7 +55,8 @@ int test3()
 
 	mpz_set_str(sig.S, "123456789", 10);
 
-	return !verify_signature(&sig, message, &pk);
+ 	int verified = !verify_signature(&sig, message, &pk);
+	return verified;
 }
 
 int test4()
@@ -71,7 +74,8 @@ int test4()
 
 	mpz_set_str(pk.A1, "123456789", 10);
 
-	return !verify_signature(&sig, message, &pk);
+	int verified = !verify_signature(&sig, message, &pk);
+	return verified;
 }
 
 int test5()
@@ -108,27 +112,27 @@ int main()
 	init_public_parameters();
 
 	printf("Test 1: EdDSA - Generate keys, sign a message and verify: ");
-	if (test1) printf(GREEN "PASSED\n" RESET);
+	if (test1()) printf(GREEN "PASSED\n" RESET);
 	else printf(RED "NOT PASSED\n" RESET);
 
 	printf("Test 2: EdDSA - Generate keys, sign a message and verify a fake message: ");
-	if (test2) printf(GREEN "PASSED\n" RESET);
+	if (test2()) printf(GREEN "PASSED\n" RESET);
 	else printf(RED "NOT PASSED\n" RESET);
 
 	printf("Test 3: EdDSA - Generate keys, sign a message and verify a fake signature: ");
-	if (test3) printf(GREEN "PASSED\n" RESET);
+	if (test3()) printf(GREEN "PASSED\n" RESET);
 	else printf(RED "NOT PASSED\n" RESET);
 
 	printf("Test 4: EdDSA - Generate keys, sign a message and verify using a fake public key: ");
-	if (test4) printf(GREEN "PASSED\n" RESET);
+	if (test4()) printf(GREEN "PASSED\n" RESET);
 	else printf(RED "NOT PASSED\n" RESET);
 
 	printf("Test 5: MiMC7 - Hash a value with no exceptions: ");
-	if (test5) printf(GREEN "PASSED\n" RESET);
+	if (test5()) printf(GREEN "PASSED\n" RESET);
 	else printf(RED "NOT PASSED\n" RESET);
 
 	printf("Test 6: MiMC7 - Hash an array of values with no exceptions: ");
-	if (test6) printf(GREEN "PASSED\n" RESET);
+	if (test6()) printf(GREEN "PASSED\n" RESET);
 	else printf(RED "NOT PASSED\n" RESET);
 
 	// we clear the public parameters to avoid memory leaks
